@@ -1,0 +1,10 @@
+ ✔ Specify API details (exactly what information I want) @done (15-05-26 10:27)
+ ✔ Define components of member page @done (15-05-26 10:27)
+ ✔ Seperate HTML components for page sections - instead of Jade?(Bio/Contributions/Votes/Social) @done (15-05-26 10:27)
+ ☐ Setup mongo
+ ☐ Get clickable map embed code into Jade
+ ☐ Add template files to views/templates folder for
+           ☐ Member info
+           ☐ State info
+           ☐ Main page w/map
+           ☐
