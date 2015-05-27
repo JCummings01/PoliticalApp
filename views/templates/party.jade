@@ -1,1 +1,7 @@
 extends layout
+
+.container
+  //- Add PARTY logo(as determined by passed PARTY ID)
+  h3 {{party.name}}
+  table.table-striped
+    //- add loop over array of individual PARTY and return all members with select info (name, party, total$(?), and another attribute)

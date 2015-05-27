@@ -1,1 +1,7 @@
 extends layout
+
+.container
+  //- Add STATE logo(as determined by passed state ID)
+  h3 {{state.name}}
+  table.table-striped
+    //- add loop over array of individual STATE and return all members with select info (name, party, total$(?), and another attribute)

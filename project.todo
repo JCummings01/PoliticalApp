@@ -1,10 +1,17 @@
  ✔ Specify API details (exactly what information I want) @done (15-05-26 10:27)
  ✔ Define components of member page @done (15-05-26 10:27)
  ✔ Seperate HTML components for page sections - instead of Jade?(Bio/Contributions/Votes/Social) @done (15-05-26 10:27)
- ☐ Setup mongo
- ☐ Get clickable map embed code into Jade
+ ✔ Setup mongo @done (15-05-26 12:59)
+ ✔ Get clickable map embed code into Jade @done (15-05-26 13:10)
  ☐ Add template files to views/templates folder for
            ☐ Member info
            ☐ State info
            ☐ Main page w/map
-           ☐
+           ☐ Add top menu(2 dropdowns & search bar) to Layout.jade
+ ☐ Link MAP click routes to state route handler
+             ☐ Add route handlers for page templates???
+
+
+
+ Note about Map: Every click will trigger an event handler that navigates to req.params(/state/:state) which will show representatives(&senators) for that state
+ (can click 'pass-on' state ID to jade file for it to render loop over that state's individual ID?)
