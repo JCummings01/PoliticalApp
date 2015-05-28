@@ -1,5 +1,110 @@
-extends layout
 
-iframe(src='http://createaclickablemap.com/map.php?&id=36296&online=true', width='900', height='525', style='border: none;')
+iframe(src='http://createaclickablemap.com/map.php?&id=36335&online=true', width='900', height='525', style='border: none;')
   script.
       if (window.addEventListener){ window.addEventListener("message", function(event) { if(event.data.length >= 22) { if( event.data.substr(0, 22) == "__MM-LOCATION.REDIRECT") location = event.data.substr(22); } }, false); } else if (window.attachEvent){ window.attachEvent("message", function(event) { if( event.data.length >= 22) { if ( event.data.substr(0, 22) == "__MM-LOCATION.REDIRECT") location = event.data.substr(22); } }, false); }
+    style.
+      ul.map li { float: left; margin: 0 25px 0 0px; width: 120px; border: 0px solid; height: 45px; padding-left: 6px; } ul.map { list-style: square url('http://createaclickablemap.com/li-arrow.png') !important; } ul.map li a{ margin: 0;padding: 0; text-decoration:underline; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:normal; color:#4591b1; } ul.map li a:hover{ text-decoration:none; color:#214b6e;} .linkBack{ display:block; width:130px; position: relative; bottom: 0px; left: 660px; font-family: Arial,Helvetica,sans-serif; font-size: 10px; font-style:italic; color:#666666;} .linkBack a {color:#666666;}.linkBack a:hover{color:#666666;text-decoration: none;}
+    ul.map
+      li
+        a(href='AL', target='_top') Alabama
+      li
+        a(href='AK', target='_top') Alaska
+      li
+        a(href='AK', target='_top') Arizona
+      li
+        a(href='AR', target='_top') Arkansas
+      li
+        a(href='CA', target='_top') California
+      li
+        a(href='CO', target='_top') Colorado
+      li
+        a(href='CT', target='_top') Connecticut
+      li
+        a(href='DE', target='_top') Delaware
+      li
+        a(href='DC', target='_top') District of Columbia
+      li
+        a(href='FL', target='_top') Florida
+      li
+        a(href='GA', target='_top') Georgia
+      li
+        a(href='HI', target='_top') Hawaii
+      li
+        a(href='ID', target='_top') Idaho
+      li
+        a(href='IL', target='_top') Illinois
+      li
+        a(href='IN', target='_top') Indiana
+      li
+        a(href='IA', target='_top') Iowa
+      li
+        a(href='KS', target='_top') Kansas
+      li
+        a(href='KY', target='_top') Kentucky
+      li
+        a(href='LA', target='_top') Louisiana
+      li
+        a(href='ME', target='_top') Maine
+      li
+        a(href='MD', target='_top') Maryland
+      li
+        a(href='MA', target='_top') Massachusetts
+      li
+        a(href='MI', target='_top') Michigan
+      li
+        a(href='MN', target='_top') Minnesota
+      li
+        a(href='MS', target='_top') Mississippi
+      li
+        a(href='MO', target='_top') Missouri
+      li
+        a(href='MT', target='_top') Montana
+      li
+        a(href='NE', target='_top') Nebraska
+      li
+        a(href='NV', target='_top') Nevada
+      li
+        a(href='NH', target='_top') New Hampshire
+      li
+        a(href='NJ', target='_top') New Jersey
+      li
+        a(href='NM', target='_top') New Mexico
+      li
+        a(href='NY', target='_top') New York
+      li
+        a(href='NC', target='_top') North Carolina
+      li
+        a(href='ND', target='_top') North Dakota
+      li
+        a(href='OH', target='_top') Ohio
+      li
+        a(href='OK', target='_top') Oklahoma
+      li
+        a(href='OR', target='_top') Oregon
+      li
+        a(href='PA', target='_top') Pennsylvania
+      li
+        a(href='RI', target='_top') Rhode Island
+      li
+        a(href='SC', target='_top') South Carolina
+      li
+        a(href='SD', target='_top') South Dakota
+      li
+        a(href='TN', target='_top') Tennessee
+      li
+        a(href='TX', target='_top') Texas
+      li
+        a(href='UT', target='_top') Utah
+      li
+        a(href='VT', target='_top') Vermont
+      li
+        a(href='VA', target='_top') Virginia
+      li
+        a(href='WA', target='_top') Washington
+      li
+        a(href='WV', target='_top') West Virginia
+      li
+        a(href='WI', target='_top') Wisconsin
+      li
+        a(href='WY', target='_top') Wyoming
+

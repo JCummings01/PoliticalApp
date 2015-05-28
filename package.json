@@ -5,6 +5,7 @@
     "express": "^4",
     "jade": "^1",
     "mongoose": "^4.0.3",
+    "request": "^2.55.0",
     "underscore": "^1.8.3"
   }
 }
