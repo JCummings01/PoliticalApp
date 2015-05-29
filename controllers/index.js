@@ -8,4 +8,5 @@ var indexController = {
     res.render('templates/' + req.params.templateName);
   },
 };
+
 module.exports = indexController;
