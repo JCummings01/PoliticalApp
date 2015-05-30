@@ -1,13 +1,15 @@
-  div
-  //- Add STATE logo(as determined by passed state ID)
-  h3 {{state.name}}
+H1 State Page
 
-  table.table-striped
-    ul
-      for rep in reps
-        li
-    //- add loop over array of individual STATE and return all members with select info (name, party, total$(?), and another attribute)
+//- div
+//-   //- Add STATE logo(as determined by passed state ID)
+//-   h3 {{state.name}}
 
-    div.reps-for-state(ng-repeat="rep in reps | filter: search")
-      //- a(ng-href="{{rep.link}}"): h3 {{rep.name}}
-      staterep(info="item")
+//-   table.table-striped
+//-     ul
+//-       for rep in reps
+//-         li
+//-     //- add loop over array of individual STATE and return all members with select info (name, party, total$(?), and another attribute)
+
+//-     div.reps-for-state(ng-repeat="rep in reps | filter: search")
+//-       //- a(ng-href="{{rep.link}}"): h3 {{rep.name}}
+//-       staterep(info="item")

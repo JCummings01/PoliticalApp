@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var bioSchema = new mongoose.Schema({
+  fullName: String,
   firstName: String,
   lastName: String,
   party: String,

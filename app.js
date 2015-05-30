@@ -19,7 +19,7 @@ app.get('/', indexController.index);
 app.get('/templates/:templateName', indexController.templates);
 
 // api methods:
-
+app.get('/get_state_members/:id', apiController.getStateMembers);
 
 var server = app.listen(5877, function() {
 	console.log('Express server listening on port ' + server.address().port);
