@@ -12,32 +12,40 @@ politicalApp.config(function($routeProvider){
 });
 
 politicalApp.factory('stateReps', function($resource, $http, $q){
+  var repList = {};
   var defer = $q.defer();
   var data = $resource('/templates/state/:id', {id: '@_id'});
+  return ({
+    getReps: getReps
+  });
 
-  var getReps = function(stateId) {
+  function getReps(stateId) {
     $http.get('/get_state_members/' + stateId)
       .success(function(data, status, headers, config){
         defer.resolve(data);
+        console.log(data);
       })
       .error(function(data, status, headers, config){
         console.log('error from mainJS');
       });
     return defer.promise;
-  };
-  return {
-    getReps: getReps
-  };
-
+    }
 });
 
+
 politicalApp.controller('stateRepController', function($scope, stateReps, $routeParams){
+  $scope.reps = {};
   var stateId = $routeParams.id;
   console.log(stateId);
 
-    stateReps.getReps(stateId).then(function(result){
-      // res.send(results); //- this is the array of data from the API call
-    });
+  var getRepresentatives = function(){
+    stateReps.getReps(stateId)
+      .then(function(results){
+        console.log(results);
+        $scope.reps = results;
+      });
+    };
+  getRepresentatives();
 });
 
 

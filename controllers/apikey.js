@@ -1,7 +1,6 @@
 var RepBio = require('../models/bio.js');
 var request = require('request');
 
-
 var apiKey = '51aa68c0c15797ab67f347add9f9d73a';
 var osUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
 
@@ -34,33 +33,34 @@ var apiController = {
           fax: repArray[i]['@attributes'].fax,
           voteSmartId: repArray[i]['@attributes'].votesmart_id,
           uniqueId: repArray[i]['@attributes'].bioguide_id
-        });
-        stateReps.push(repMaker);
+          });
+          stateReps.push(repMaker);
         }
 
       } else {
         res.send('API request failed :[ ');
       }
     res.send(stateReps);
+    console.log(stateReps);
     });
   },
 
-  saveMemberBio: function(req, res){
-    var newMember = new RepBio({
-      fullName: req.body.firstlast,
-      lastName: req.body.lastname,
-      party: req.body.party,
-      state: getStateMembers.id, //How to get state code here
-      birthday: req.body.birthdate,
-      termStart: req.body.first_elected,
-      phone: req.body.phone,
-      website: req.body.website,
-      contactForm: req.body.webform,
-      fax: req.body.fax,
-      voteSmartId: req.body.votesmart_id,
-      uniqueId: req.body.bioguide_id
-    });
-  }
+  // saveMemberBio: function(req, res){
+  //   var newMember = new RepBio({
+  //     fullName: req.body.firstlast,
+  //     lastName: req.body.lastname,
+  //     party: req.body.party,
+  //     state: getStateMembers.id, //How to get state code here
+  //     birthday: req.body.birthdate,
+  //     termStart: req.body.first_elected,
+  //     phone: req.body.phone,
+  //     website: req.body.website,
+  //     contactForm: req.body.webform,
+  //     fax: req.body.fax,
+  //     voteSmartId: req.body.votesmart_id,
+  //     uniqueId: req.body.bioguide_id
+  //   });
+  // }
 
 };
 

@@ -1,8 +1,9 @@
 H1 States
 
-p {{results[0].fullname}}
+div
+  div.rep-info(ng-repeat="rep in reps")
+    li {{rep.fullName}}
+
 
 //-   //- Add STATE logo(as determined by passed state ID)
 
-//- table.table-striped.reps-for-state(ng-repeat="rep in reps | filter: search")
-//-   staterep(info="rep")
