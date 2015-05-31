@@ -12,23 +12,41 @@ var apiController = {
       url: osUrl  + req.params.id + '&apikey=' + apiKey + '&output=json',
       json: true,
     };
-
+    var stateReps = [];
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        // var reps = response.body.response.legislator['@attributes'];
         var repArray = [];
-        var reps = response.body.response.legislator['@attributes'];
-        for (var i = 0; i <= 2 ; i++) {
-          repArray.push(response.body.response.legislator[i]['@attributes']);
+        for (var i = 0; i < body.response.legislator.length; i++) {
+
+          repArray.push(response.body.response.legislator[i]);
+
+          var repMaker = new RepBio({
+          fullName: repArray[i]['@attributes'].firstlast,
+          lastName: repArray[i]['@attributes'].lastname,
+          party: repArray[i]['@attributes'].party,
+          state: req.params.id,
+          birthday: repArray[i]['@attributes'].birthdate,
+          termStart: repArray[i]['@attributes'].first_elected,
+          phone: repArray[i]['@attributes'].phone,
+          website: repArray[i]['@attributes'].website,
+          contactForm: repArray[i]['@attributes'].webform,
+          fax: repArray[i]['@attributes'].fax,
+          voteSmartId: repArray[i]['@attributes'].votesmart_id,
+          uniqueId: repArray[i]['@attributes'].bioguide_id
+        });
+        stateReps.push(repMaker);
         }
-          console.log(repArray);
+
       } else {
-        res.send('getStateMembers request failed');
+        res.send('API request failed :[ ');
       }
+    res.send(stateReps);
     });
   },
 
   saveMemberBio: function(req, res){
-    var newMember = new bioSchema({
+    var newMember = new RepBio({
       fullName: req.body.firstlast,
       lastName: req.body.lastname,
       party: req.body.party,

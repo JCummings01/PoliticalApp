@@ -18,18 +18,17 @@ politicalApp.factory('stateReps', function($resource, $http, $q){
   var getReps = function(stateId) {
     $http.get('/get_state_members/' + stateId)
       .success(function(data, status, headers, config){
-        console.log('test');
         defer.resolve(data);
-        console.log(stateId);
       })
       .error(function(data, status, headers, config){
-        console.log('/getStateMembers failed!');
+        console.log('error from mainJS');
       });
     return defer.promise;
   };
   return {
     getReps: getReps
   };
+
 });
 
 politicalApp.controller('stateRepController', function($scope, stateReps, $routeParams){
@@ -37,8 +36,7 @@ politicalApp.controller('stateRepController', function($scope, stateReps, $route
   console.log(stateId);
 
     stateReps.getReps(stateId).then(function(result){
-      console.log(result);
-      // save this somewhere
+      // res.send(results); //- this is the array of data from the API call
     });
 });
 
@@ -47,7 +45,7 @@ politicalApp.controller('stateRepController', function($scope, stateReps, $route
 politicalApp.directive('staterep', function(){
   return{
     restrict: 'E',
-    templateUrl: '/templates/state',
+    templateUrl: '/templates/stateRep',
     scope: {
       info: '='
     }
