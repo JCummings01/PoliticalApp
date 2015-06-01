@@ -21,6 +21,7 @@ var apiController = {
           repArray.push(response.body.response.legislator[i]);
 
           var repMaker = new RepBio({
+          candidateId: repArray[i]['@attributes'].cid,
           fullName: repArray[i]['@attributes'].firstlast,
           lastName: repArray[i]['@attributes'].lastname,
           party: repArray[i]['@attributes'].party,

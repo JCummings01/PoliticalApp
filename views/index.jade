@@ -10,19 +10,6 @@ block content
               span.icon-bar
           a.navbar-brand(href="#") PoliticalApp
 
-      div#navbar-inverse.collapse.navbar-collapse
-          ul.nav.navbar-nav
-              li.dropdown
-                  a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) States
-                      span.caret
-                  ul.dropdown-menu( role="menu" )
-                      li: a( href="#" ) Action
-                      li: a( href="#" ) Another action
-                      li: a( href="#" ) Something else here
-                      li.divider
-                      li.dropdown-header Nav header
-                      li: a( href="#" ) Separated link
-                      li: a( href="#" ) One more separated link
-          input(type="text", placeholder="Search...", ng-model="search")
+      input(type="text", placeholder="Search...", ng-model="search")
 
   div(ng-view)

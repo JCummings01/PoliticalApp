@@ -1,8 +1,13 @@
 H1 States
 
-div
-  div.rep-info(ng-repeat="rep in reps")
-    li {{rep.fullName}}
+p {{state}}
+
+div.rep-info.row(ng-repeat="rep in reps | filter: search")
+    a(ng-href="#/member/{{rep.candidateId}}"): li {{rep.fullName}}
+
+
+
+
 
 
 //-   //- Add STATE logo(as determined by passed state ID)
