@@ -1,14 +1,18 @@
 var RepBio = require('../models/bio.js');
 var request = require('request');
+var govTrack = require('govtrack-node');
 
 var apiKey = '51aa68c0c15797ab67f347add9f9d73a';
-var osUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
+var osLegUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
+var osMoneyUrl = 'https://www.opensecrets.org/api/?method=candIndustry&cid=';
+var voteSmartUrl = 'http://api.votesmart.org/Votes.getByOfficial';
+
 
 var apiController = {
   getStateMembers: function(req, res){
 
     var options = {
-      url: osUrl  + req.params.id + '&apikey=' + apiKey + '&output=json',
+      url: osLegUrl  + req.params.id + '&apikey=' + apiKey + '&output=json',
       json: true,
     };
     var stateReps = [];
@@ -42,30 +46,93 @@ var apiController = {
         res.send('API request failed :[ ');
       }
     res.send(stateReps);
-    console.log(stateReps);
+    // console.log(stateReps);
     });
   },
 
-  // saveMemberBio: function(req, res){
-  //   var newMember = new RepBio({
-  //     fullName: req.body.firstlast,
-  //     lastName: req.body.lastname,
-  //     party: req.body.party,
-  //     state: getStateMembers.id, //How to get state code here
-  //     birthday: req.body.birthdate,
-  //     termStart: req.body.first_elected,
-  //     phone: req.body.phone,
-  //     website: req.body.website,
-  //     contactForm: req.body.webform,
-  //     fax: req.body.fax,
-  //     voteSmartId: req.body.votesmart_id,
-  //     uniqueId: req.body.bioguide_id
-  //   });
-  // }
+  getMemberBio: function(req, res){
+    var options = {
+      url: osLegUrl  + req.params.candidate + '&apikey=' + apiKey + '&output=json',
+      json: true,
+    };
+    // console.log(req.params.candidate);
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        // console.log(response);
+        var bioMaker = new RepBio({
+          candidateId: body.response.legislator['@attributes'].cid,
+          fullName: body.response.legislator['@attributes'].firstlast,
+          lastName: body.response.legislator['@attributes'].lastname,
+          party: body.response.legislator['@attributes'].party,
+          birthday: body.response.legislator['@attributes'].birthdate,
+          termStart: body.response.legislator['@attributes'].first_elected,
+          phone: body.response.legislator['@attributes'].phone,
+          website: body.response.legislator['@attributes'].website,
+          contactForm: body.response.legislator['@attributes'].webform,
+          fax: body.response.legislator['@attributes'].fax,
+          voteSmartId: body.response.legislator['@attributes'].votesmart_id,
+          uniqueId: body.response.legislator['@attributes'].bioguide_id
+          });
+        res.send(bioMaker);
+      } else {
+        res.send('API request failed :[ ');
+      }
+    });
+  },
 
+  getMemberMoney: function(req, res){
+    var options = {
+      url: osMoneyUrl  + req.params.candidate + '&cycle=2014&apikey=' + apiKey + '&output=json',
+      json: true,
+    };
+    var contributions = [];
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        // console.log(body.response.industries.industry);
+        for (var i = 0; i < body.response.industries.industry.length; i++) {
+          contributions.push(body.response.industries.industry[i]['@attributes']);
+          }
+          res.send(contributions);
+        } else {
+          res.send('API request failed :[ ');
+      }
+    });
+  },
+
+  getMemberVotes: function(req, res){
+//     var
+//     var options = {
+//       url: voteSmartUrl + '?key='
+//     }
+//   }
+// };
+    var candId = req.params.candidateId;
+    var votesList = [];
+
+    govTrack.findVote({ congress: 114 }, function(err, res) {
+    // govTrack.findRole({ current: true }, function(err, res) {
+      if (!err) {
+        for (var i = 0; i < res.objects.length; i++) {
+          votesList.push(res.objects[i]);
+        }
+        console.log(votesList);
+      } else {
+        console.log('error getting session votes!');
+      }
+
+    // govTrack.findVoteVoter({ osid: candId , }, function(err, res){
+    //   if (!error && response.statusCode == 200) {
+
+    //   } else {
+
+    //   }
+    // });
+    });
+}
 };
 
-
 module.exports = apiController;
-
-// TEST:  http://www.opensecrets.org/api/?method=getLegislators&id=NJ&apikey=51aa68c0c15797ab67f347add9f9d73a
+// TEST:  http://www.opensecrets.org/api/?method=getLegislators&id=N00033474&apikey=51aa68c0c15797ab67f347add9f9d73a
+// http://www.opensecrets.org/api/?method=getLegislators&id=N00033474&apikey=51aa68c0c15797ab67f347add9f9d73a
+// http://www.opensecrets.org/api/?method=candIndustry&cid=N00033474&cycle=2014&apikey=51aa68c0c15797ab67f347add9f9d73a&output=json
+// http://api.votesmart.org/CandidateBio.getBio?key=<your_key>&candidateId=9490

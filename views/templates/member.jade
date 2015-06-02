@@ -1,2 +1,25 @@
+h2 {{bio.fullName}}
+//- Sections for BIO
+h3 Candidate Bio:
+p Party: {{bio.party}}
+p Started their term: {{bio.termStart}}
+p Birthday: {{bio.birthday}}
+p Phone: {{bio.phone}}
+p Website: {{bio.website}}
+p Contact Form: {{bio.contactForm}}
+p Fax: {{bio.fax}}
+p VoteSmart ID: {{bio.voteSmartId}}
+p Candidate ID: {{bio.uniqueId}}
 
-//- Create sections for BIO, CONTRIBUTIONS, VOTING, & SOCIAL
+//- Section for CONTRIBUTIONS
+h3 Campaign Contributions:
+p  Industry: {{money.industry_name}}
+  p  Individual Contributions: {{money.indivs}}
+  p  PAC Contributions: {{money.pacs}}
+  p  Total {{money.industry_name}} Contributions: {{money.total}}
+//- add charts?
+
+//- Section for VOTING
+h3 Voting Record:
+
+//- Section for SOCIAL
