@@ -5,8 +5,8 @@ var apiController = require('./controllers/apikey.js');
 var request = require('request');
 var govTrack = require('govtrack-node');
 
-// var mongoose = require('mongoose');
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/politics');
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/politics');
 
 var app = express();
 app.set('view engine', 'jade');
