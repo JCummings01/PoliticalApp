@@ -2,6 +2,7 @@ var RepBio = require('../models/bio.js');
 var request = require('request');
 
 var apiKey = '51aa68c0c15797ab67f347add9f9d73a';
+var apiKey2 = '53419fda5eab02a110c479b441665e10';
 var osLegUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
 var osMoneyUrl = 'https://www.opensecrets.org/api/?method=candIndustry&cid=';
 var voteSmartUrl = 'http://api.votesmart.org/Votes.getByOfficial';
@@ -11,11 +12,12 @@ var apiController = {
   getStateMembers: function(req, res){
 
     var options = {
-      url: osLegUrl  + req.params.id + '&apikey=' + apiKey + '&output=json',
+      url: osLegUrl  + req.params.id + '&apikey=' + apiKey2 + '&output=json',
       json: true,
     };
     var stateReps = [];
     request(options, function (error, response, body) {
+
       if (!error && response.statusCode == 200) {
         // var reps = response.body.response.legislator['@attributes'];
         var repArray = [];
@@ -42,7 +44,8 @@ var apiController = {
         }
 
       } else {
-        res.send('API request failed :[ ');
+        return res.sendStatus(400);
+
       }
     res.send(stateReps);
     // console.log(stateReps);
@@ -51,7 +54,7 @@ var apiController = {
 
   getMemberBio: function(req, res){
     var options = {
-      url: osLegUrl  + req.params.candidate + '&apikey=' + apiKey + '&output=json',
+      url: osLegUrl  + req.params.candidate + '&apikey=' + apiKey2 + '&output=json',
       json: true,
     };
     // console.log(req.params.candidate);
@@ -81,7 +84,7 @@ var apiController = {
 
   getMemberMoney: function(req, res){
     var options = {
-      url: osMoneyUrl  + req.params.candidate + '&cycle=2014&apikey=' + apiKey + '&output=json',
+      url: osMoneyUrl  + req.params.candidate + '&cycle=2014&apikey=' + apiKey2 + '&output=json',
       json: true,
     };
     var contributions = [];

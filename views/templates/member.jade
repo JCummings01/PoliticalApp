@@ -1,16 +1,15 @@
-h2 {{bio.fullName}}
-
-h3 Candidate Bio
-img(src="https://s3.amazonaws.com/assets.opensecrets.org/politicians/img/{{candidateId}}.jpg")
-p Party: {{bio.party}}
-p Started their term: {{bio.termStart}}
-p Birthday: {{bio.birthday}}
-p Phone: {{bio.phone}}
-p Website: {{bio.website}}
-p Contact Form: {{bio.contactForm}}
-p Fax: {{bio.fax}}
-p VoteSmart ID: {{bio.voteSmartId}}
-p Candidate ID: {{bio.uniqueId}}
+div.well
+  h2 {{bio.fullName}}
+  img(src="https://s3.amazonaws.com/assets.opensecrets.org/politicians/img/{{candidateId}}.jpg")
+  p Party: {{bio.party}}
+  p Started their term: {{bio.termStart}}
+  p Birthday: {{bio.birthday}}
+  p Phone: {{bio.phone}}
+  p Website: {{bio.website}}
+  p Contact Form: {{bio.contactForm}}
+  p Fax: {{bio.fax}}
+  p VoteSmart ID: {{bio.voteSmartId}}
+  p Candidate ID: {{bio.uniqueId}}
 
 h3 Campaign Contributions
 ul(ng-repeat= "money in moneys")
@@ -21,8 +20,9 @@ ul(ng-repeat= "money in moneys")
 
 h3 Sponsored Bills
 ul(ng-repeat= "bill in bills")
-  li ddBill ID: {{bill.BillId}}
-  li Chamber: {{bill.Chamber}}
-  li Introduced On: {{bill.IntroducedOn}}
-  li Official Title: {{bill.OfficialTitle}}
-  li More Information: {{bill.Info}}
+   div.well
+    p <strong>ddBill ID</strong> {{bill.BillId}}
+    p <strong>Chamber</strong> {{bill.Chamber}}
+    p <strong>Introduced On</strong> {{bill.IntroducedOn}}
+    p <strong>Official Title</strong> {{bill.OfficialTitle}}
+    a.btn.btn-default(ng-href='{{bill.Info}}', role='button') More Information

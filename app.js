@@ -25,7 +25,7 @@ app.get('/get_member_bio/:candidate', apiController.getMemberBio);
 app.get('/get_member_money/:candidate', apiController.getMemberMoney);
 app.get('/get_member_votes/:uniqueId', apiController.getMemberVotes);
 
-var port = process.env.PORT || 5876;
+var port = process.env.PORT || 5877;
 var server = app.listen(port, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });

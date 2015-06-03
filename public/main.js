@@ -27,10 +27,10 @@ politicalApp.factory('stateReps', function($resource, $http, $q){
     $http.get('/get_state_members/' + stateId)
       .success(function(data, status, headers, config){
         defer.resolve(data);
-        // console.log(data);
+        console.log(data);
       })
       .error(function(data, status, headers, config){
-        console.log('error from mainJS');
+        defer.reject(data);
       });
     return defer.promise;
     }
@@ -42,6 +42,7 @@ politicalApp.controller('stateRepController', function($scope, stateReps, $route
   $scope.reps = {};
   $scope.state = $routeParams.id;
   $scope.lowercase = lowercaseStateName;
+  $scope.message;
   // console.log(stateId);
 
   var getRepresentatives = function(){
@@ -49,6 +50,9 @@ politicalApp.controller('stateRepController', function($scope, stateReps, $route
       .then(function(results){
         // console.log(results);
         $scope.reps = results;
+      })
+      .catch(function(results){
+        $scope.message="Daily API Call Limit has been exceeded.";
       });
     };
   getRepresentatives();
