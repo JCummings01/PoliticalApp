@@ -3,7 +3,7 @@ var politicalApp = angular.module('politicalApp', ['ngResource', 'ngRoute']);
 politicalApp.config(function($routeProvider){
   $routeProvider
     .when('/', {
-      templateUrl: '/templates/map'
+      templateUrl: '/templates/map2'
     })
     .when('/templates/state/:id', {
       templateUrl: '/templates/state',
