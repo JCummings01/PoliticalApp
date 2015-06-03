@@ -37,9 +37,11 @@ politicalApp.factory('stateReps', function($resource, $http, $q){
 });
 
 politicalApp.controller('stateRepController', function($scope, stateReps, $routeParams){
+  var stateId = $routeParams.id;
+  var lowercaseStateName = stateId.toLowerCase();
   $scope.reps = {};
   $scope.state = $routeParams.id;
-  var stateId = $routeParams.id;
+  $scope.lowercase = lowercaseStateName;
   // console.log(stateId);
 
   var getRepresentatives = function(){
@@ -64,16 +66,21 @@ politicalApp.controller('stateRepController', function($scope, stateReps, $route
 
 politicalApp.controller('summaryController', function($scope, osBio, osMoney, vsVotes, $routeParams){
   $scope.bio = {};
-  $scope.votes = {};
-  $scope.money = {};
+  $scope.bills = {};
+  $scope.moneys = {};
+  $scope.bioguide = {};
   $scope.candidateId = $routeParams.candidateId;
   var candidateId = $routeParams.candidateId;
   // console.log(candidateId);
+
 
   var getBios = function(){
     osBio.getBio(candidateId)
       .then(function(results){
         $scope.bio = results;
+        $scope.bioguide = results.uniqueId;
+          getVotingRecord(results.uniqueId);
+        // console.log(results.uniqueId);
         // console.log(results);
       });
     };
@@ -82,15 +89,15 @@ politicalApp.controller('summaryController', function($scope, osBio, osMoney, vs
   var getContributions = function(){
     osMoney.getMoney(candidateId)
       .then(function(results){
-        $scope.money = results;
+        $scope.moneys = results;
       });
     };
   getContributions();
 
-  var getVotingRecord = function(){
-    vsVotes.getVotes(candidateId)
+  var getVotingRecord = function(uniqueId){
+    vsVotes.getVotes(uniqueId)
       .then(function(results){
-        $scope.votes = results;
+        $scope.bills = results;
       });
     };
   getVotingRecord();
@@ -142,14 +149,14 @@ politicalApp.factory('vsVotes', function($resource, $http, $q){
       getVotes: getVotes
     });
 
-    function getVotes(candidateId) {
-      $http.get('/get_member_votes/' + candidateId)
+    function getVotes(uniqueId) {
+      $http.get('/get_member_votes/' + uniqueId)
         .success(function(data, status, headers, config){
           defer.resolve(data);
           console.log(data);
-      })
-      .error(function(data, status, headers, config){
-        console.log('error from votegrab on mainJS!');
+        })
+        .error(function(data, status, headers, config){
+          console.log('error from votegrab on mainJS!');
       });
     return defer.promise;
     }

@@ -1,6 +1,7 @@
 h2 {{bio.fullName}}
-//- Sections for BIO
-h3 Candidate Bio:
+
+h3 Candidate Bio
+img(src="https://s3.amazonaws.com/assets.opensecrets.org/politicians/img/{{candidateId}}.jpg")
 p Party: {{bio.party}}
 p Started their term: {{bio.termStart}}
 p Birthday: {{bio.birthday}}
@@ -11,15 +12,17 @@ p Fax: {{bio.fax}}
 p VoteSmart ID: {{bio.voteSmartId}}
 p Candidate ID: {{bio.uniqueId}}
 
-//- Section for CONTRIBUTIONS
-h3 Campaign Contributions:
-p  Industry: {{money.industry_name}}
-  p  Individual Contributions: {{money.indivs}}
-  p  PAC Contributions: {{money.pacs}}
-  p  Total {{money.industry_name}} Contributions: {{money.total}}
-//- add charts?
+h3 Campaign Contributions
+ul(ng-repeat= "money in moneys")
+  li  Industry: {{money.industry_name}}
+  li  Individual Contributions: {{money.indivs}}
+  li  PAC Contributions: {{money.pacs}}
+  li  Total {{money.industry_name}} Contributions: {{money.total}}
 
-//- Section for VOTING
-h3 Voting Record:
-
-//- Section for SOCIAL
+h3 Sponsored Bills
+ul(ng-repeat= "bill in bills")
+  li Bill ID: {{bill.BillId}}
+  li Chamber: {{bill.Chamber}}
+  li Introduced On: {{bill.IntroducedOn}}
+  li Official Title: {{bill.OfficialTitle}}
+  li More Information: {{bill.Info}}

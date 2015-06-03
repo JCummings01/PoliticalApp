@@ -1,12 +1,11 @@
 var RepBio = require('../models/bio.js');
 var request = require('request');
-var govTrack = require('govtrack-node');
 
 var apiKey = '51aa68c0c15797ab67f347add9f9d73a';
 var osLegUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
 var osMoneyUrl = 'https://www.opensecrets.org/api/?method=candIndustry&cid=';
 var voteSmartUrl = 'http://api.votesmart.org/Votes.getByOfficial';
-
+var sunlightUrl = 'https://congress.api.sunlightfoundation.com/bills?';
 
 var apiController = {
   getStateMembers: function(req, res){
@@ -24,7 +23,7 @@ var apiController = {
 
           repArray.push(response.body.response.legislator[i]);
 
-          var repMaker = new RepBio({
+          var repMaker = ({
           candidateId: repArray[i]['@attributes'].cid,
           fullName: repArray[i]['@attributes'].firstlast,
           lastName: repArray[i]['@attributes'].lastname,
@@ -59,7 +58,7 @@ var apiController = {
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         // console.log(response);
-        var bioMaker = new RepBio({
+        var bioMaker = ({
           candidateId: body.response.legislator['@attributes'].cid,
           fullName: body.response.legislator['@attributes'].firstlast,
           lastName: body.response.legislator['@attributes'].lastname,
@@ -100,35 +99,36 @@ var apiController = {
   },
 
   getMemberVotes: function(req, res){
-//     var
-//     var options = {
-//       url: voteSmartUrl + '?key='
-//     }
-//   }
-// };
-    var candId = req.params.candidateId;
-    var votesList = [];
-
-    govTrack.findVote({ congress: 114 }, function(err, res) {
-    // govTrack.findRole({ current: true }, function(err, res) {
-      if (!err) {
-        for (var i = 0; i < res.objects.length; i++) {
-          votesList.push(res.objects[i]);
-        }
-        console.log(votesList);
-      } else {
-        console.log('error getting session votes!');
-      }
-
-    // govTrack.findVoteVoter({ osid: candId , }, function(err, res){
-    //   if (!error && response.statusCode == 200) {
-
-    //   } else {
-
-    //   }
-    // });
-    });
-}
+    var apiKeyForSunlight = 'fe73564a6d8c4ca68e6f5b9ea7ca0e88';
+    var uniqueId = req.params.uniqueId;
+    var sponsor = 'sponsor_id=';
+    var coSponsor = 'co_sponsor_id=';
+    var sponsorGet = {
+      url: sunlightUrl + sponsor + uniqueId + '&apikey=' + apiKeyForSunlight,
+      json: true,
+    };
+    var sponsoredBills = [];
+    request(sponsorGet, function (error, response, body){
+        if (!error && response.statusCode == 200) {
+          // console.log(body.results);
+          for (var i = 0; i < body.results.length; i++) {
+            var billInformation = {
+              BillId: body.results[i].bill_id,
+              Chamber: body.results[i].chamber,
+              IntroducedOn: body.results[i].introduced_on,
+              OfficialTitle: body.results[i].official_title,
+              Info: body.results[i].urls.govtrack
+            };
+            sponsoredBills.push(billInformation);
+            console.log(billInformation);
+          }
+          console.log(sponsoredBills.length);
+          res.send(sponsoredBills);
+        } else {
+          res.send('API request failed :[ ');
+    }
+  });
+  }
 };
 
 module.exports = apiController;

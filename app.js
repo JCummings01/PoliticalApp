@@ -5,8 +5,8 @@ var apiController = require('./controllers/apikey.js');
 var request = require('request');
 var govTrack = require('govtrack-node');
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/politics');
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/politics');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -23,8 +23,8 @@ app.get('/templates/:templateName', indexController.templates);
 app.get('/get_state_members/:id', apiController.getStateMembers);
 app.get('/get_member_bio/:candidate', apiController.getMemberBio);
 app.get('/get_member_money/:candidate', apiController.getMemberMoney);
-app.get('/get_member_votes/:candidate', apiController.getMemberVotes);
+app.get('/get_member_votes/:uniqueId', apiController.getMemberVotes);
 
-var server = app.listen(5877, function() {
+var server = app.listen(5876, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
