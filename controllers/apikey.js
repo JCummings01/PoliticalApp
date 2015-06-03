@@ -120,7 +120,7 @@ var apiController = {
               Info: body.results[i].urls.govtrack
             };
             sponsoredBills.push(billInformation);
-            console.log(billInformation);
+            // console.log(billInformation);
           }
           console.log(sponsoredBills.length);
           res.send(sponsoredBills);

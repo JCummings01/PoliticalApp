@@ -79,7 +79,7 @@ politicalApp.controller('summaryController', function($scope, osBio, osMoney, vs
       .then(function(results){
         $scope.bio = results;
         $scope.bioguide = results.uniqueId;
-          getVotingRecord(results.uniqueId);
+        getVotingRecord(results.uniqueId);
         // console.log(results.uniqueId);
         // console.log(results);
       });
@@ -100,7 +100,6 @@ politicalApp.controller('summaryController', function($scope, osBio, osMoney, vs
         $scope.bills = results;
       });
     };
-  getVotingRecord();
 });
 
 politicalApp.factory('osBio', function($resource, $http, $q){
@@ -157,7 +156,7 @@ politicalApp.factory('vsVotes', function($resource, $http, $q){
         })
         .error(function(data, status, headers, config){
           console.log('error from votegrab on mainJS!');
-      });
-    return defer.promise;
+        });
+      return defer.promise;
     }
 });
