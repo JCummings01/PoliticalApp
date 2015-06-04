@@ -1,12 +1,8 @@
-h1 {{state}}
-
-h3 Representatives
+h1(class="stateface stateface-replace stateface-{{lowercase}} stateicon") {{lowercase}}
 
 div(ng-if="message")
   p.alert.alert-danger {{message}}
 
 div.rep-info.row(ng-repeat="rep in reps track by $index")
   a.btn.btn-default.btn-lg.col-sm-4(ng-href='#/member/{{rep.candidateId}}', role='button') {{rep.fullName}}
-
-//-   //- Add STATE logo(as determined by passed state ID)
 

@@ -3,6 +3,7 @@ var request = require('request');
 
 var apiKey = '51aa68c0c15797ab67f347add9f9d73a';
 var apiKey2 = '53419fda5eab02a110c479b441665e10';
+var apiKey3 = '0f129237b224a1237a612b6ab64a1afb';
 var osLegUrl = 'https://www.opensecrets.org/api/?method=getLegislators&id=';
 var osMoneyUrl = 'https://www.opensecrets.org/api/?method=candIndustry&cid=';
 var voteSmartUrl = 'http://api.votesmart.org/Votes.getByOfficial';

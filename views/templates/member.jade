@@ -1,28 +1,31 @@
 div.well
-  h2 {{bio.fullName}}
   img(src="https://s3.amazonaws.com/assets.opensecrets.org/politicians/img/{{candidateId}}.jpg")
-  p Party: {{bio.party}}
-  p Started their term: {{bio.termStart}}
-  p Birthday: {{bio.birthday}}
-  p Phone: {{bio.phone}}
-  p Website: {{bio.website}}
-  p Contact Form: {{bio.contactForm}}
-  p Fax: {{bio.fax}}
-  p VoteSmart ID: {{bio.voteSmartId}}
-  p Candidate ID: {{bio.uniqueId}}
+  h2.namerep {{bio.fullName}}
+  p.repinfo <strong>Party</strong> {{bio.party}}
+  p.repinfo <strong>Started their term </strong> {{bio.termStart}}
+  p.repinfo <strong>Birthday</strong> {{bio.birthday}}
+  p.repinfo <strong>Phone</strong> {{bio.phone}}
+  p.repinfo <strong>Website</strong> {{bio.website}}
+  p.repinfo <strong>Contact Form</strong> {{bio.contactForm}}
+  p.repinfo <strong>Fax</strong> {{bio.fax}}
+  p.repinfo <strong>VoteSmart ID</strong> {{bio.voteSmartId}}
+  p.repinfo <strong>Candidate ID</strong> {{bio.uniqueId}}
 
-h3 Campaign Contributions
-ul(ng-repeat= "money in moneys")
-  li  Industry: {{money.industry_name}}
-  li  Individual Contributions: {{money.indivs}}
-  li  PAC Contributions: {{money.pacs}}
-  li  Total {{money.industry_name}} Contributions: {{money.total}}
+//- h3 Campaign Contributions
+//- ul(ng-repeat= "money in moneys")
+//-   li  Industry: {{money.industry_name}}
+//-   li  Individual Contributions: {{money.indivs}}
+//-   li  PAC Contributions: {{money.pacs}}
+//-   li  Total {{money.industry_name}} Contributions: {{money.total}}
 
-h3 Sponsored Bills
+nvd3(options='options' data="data")
+
+h3.sponsoredbills Sponsored Bills
 ul(ng-repeat= "bill in bills")
    div.well
-    p <strong>ddBill ID</strong> {{bill.BillId}}
-    p <strong>Chamber</strong> {{bill.Chamber}}
-    p <strong>Introduced On</strong> {{bill.IntroducedOn}}
-    p <strong>Official Title</strong> {{bill.OfficialTitle}}
-    a.btn.btn-default(ng-href='{{bill.Info}}', role='button') More Information
+    p.repinfo <strong>Bill ID</strong> {{bill.BillId}}
+    p.repinfo <strong>Chamber</strong> {{bill.Chamber}}
+    p.repinfo <strong>Introduced On</strong> {{bill.IntroducedOn}}
+    p.repinfo <strong>Official Title</strong> {{bill.OfficialTitle}}
+    a.btn.btn-default(ng-href='{{bill.Info}}', role='button') Read more about this Bill
+  a.btn.btn-default See More Bills
