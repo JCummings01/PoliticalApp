@@ -1,0 +1,13 @@
+ ☐ Update project plan to reflect VoteSmart API cost (& find alternative source for desired data)
+   ☐  Pull specific data points for 'Independence Rating' (last 20 bills, rep roll call vote, party sponsorship of bill) (see: IndyMeter notes)
+   ☐  Define specific data points(+/- 3) to cross-reference with IBM Watson API (see: Watson notes)
+   ☐  Define reputable sources(+/- 2) to pull data from for IBM Watson API reference (see: Watson notes)
+ ☐ Expand data on 'State Rep' page to include basic bio-data set (party, picture, age, largest donor(?)) (see: App notes)
+ ☐ Design individual rep buttons on 'State Rep' page to look similar to Google "cards" (see: Design notes)
+ ☐ Fix 'More Bills' button (see: Coding notes)
+ ☐ Move API keys to hidden file (see: Coding notes)
+ ☐ Add "More Info" options to individual rep bio
+   ☐ Link to rep Wikipedia page
+   ☐ Link to rep Facebook page
+   ☐ Link to reps Other Socal Media(Twitter/Blog/etc.)
+
